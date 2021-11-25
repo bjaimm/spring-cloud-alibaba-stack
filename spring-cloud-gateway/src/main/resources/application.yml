@@ -1,0 +1,21 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: spring-cloud-gateway
+  cloud:
+    gateway:
+      discovery:
+        locator:
+          enabled: true
+      routes:
+        - id: route1
+          uri: lb://spring-cloud-alibaba-nacos-discovery-service-provider
+          predicates:
+            - Path=/*/**
+    nacos:
+      discovery:
+        server-addr: nacos1:8848,nacos2:8848,nacos3:8848
+        username: nacos
+        password: nacos
