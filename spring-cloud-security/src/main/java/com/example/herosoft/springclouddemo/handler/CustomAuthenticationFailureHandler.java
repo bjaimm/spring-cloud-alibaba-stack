@@ -16,7 +16,7 @@ import java.io.PrintWriter;
 public class CustomAuthenticationFailureHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException exception) throws IOException, ServletException {
-        log.debug("::: 认证失败");
+        log.debug("::: 认证失败！");
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out= response.getWriter();
         out.write("fail");
