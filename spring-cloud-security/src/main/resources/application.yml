@@ -1,11 +1,11 @@
 server:
   port: 8085
   servlet:
-    context-path: /spring-cloud-alibaba-nacos-discovery-service-security
+    context-path: /spring-cloud-security
 
 spring:
   application:
-    name: spring-cloud-alibaba-nacos-discovery-service-security
+    name: spring-cloud-security
 
   datasource:
     url: jdbc:mysql://localhost:3306/nacos-security?characterEncoding=utf8

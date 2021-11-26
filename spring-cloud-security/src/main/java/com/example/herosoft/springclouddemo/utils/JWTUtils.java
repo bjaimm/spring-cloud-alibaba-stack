@@ -31,13 +31,13 @@ public final class JWTUtils {
                 .setIssuedAt(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
                 .setIssuer(ISSUER)
                 .signWith(Keys.hmacShaKeyFor(SECRET.getBytes()), SignatureAlgorithm.HS512)
-                .serializeToJsonWith(map -> JSON.toJSONBytes(map))
+                //.serializeToJsonWith(map -> JSON.toJSONBytes(map))
                 .compact();
     }
     public static Claims claims(String jwt){
         return Jwts.parserBuilder()
                 .setSigningKey(Keys.hmacShaKeyFor(SECRET.getBytes()))
-                .deserializeJsonWith(bytes -> JSONObject.parseObject(new String(bytes),new TypeReference<Map<String,Object>>(){}))
+                //.deserializeJsonWith(bytes -> JSONObject.parseObject(new String(bytes),new TypeReference<Map<String,Object>>(){}))
                 .build()
                 .parseClaimsJws(jwt)
                 .getBody();
