@@ -1,5 +1,6 @@
 package com.example.herosoft.springclouddemo.config;
 
+import com.example.herosoft.springclouddemo.domain.dto.CustomUserDetails;
 import com.example.herosoft.springclouddemo.service.impl.UserDetailsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +27,7 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
         String username=authentication.getName();
         String password=authentication.getCredentials().toString();
 
-        UserDetails userDetails=userDetailsService.loadUserByUsername(username);
+        CustomUserDetails userDetails=userDetailsService.loadUserByUsername(username);
 
         boolean flag = bCryptPasswordEncoder.matches(password,userDetails.getPassword());
         if(flag){

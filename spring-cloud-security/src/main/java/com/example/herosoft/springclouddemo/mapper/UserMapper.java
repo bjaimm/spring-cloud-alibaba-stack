@@ -12,10 +12,10 @@ import java.util.List;
 @Repository
 @Mapper
 public interface UserMapper {
-    @Select("select * from user where user_name=#{username}")
+    @Select("select u_id,user_name,user_password from shop_user where user_name=#{username}")
     MyUser findByUsername(String username);
 
-    @Insert("insert into user(user_name,password) values(#{name},#{password})")
+    @Insert("insert into shop_user(user_name,password) values(#{user_name},#{password})")
     int save(MyUser user);
 
     @Select("select role.name from user_role join role on user_role.role_id= role.id where user_role.user_id=#{userId}")

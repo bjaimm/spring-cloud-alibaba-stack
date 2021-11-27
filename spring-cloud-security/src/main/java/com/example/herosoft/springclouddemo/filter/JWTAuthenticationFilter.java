@@ -2,17 +2,15 @@ package com.example.herosoft.springclouddemo.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.example.herosoft.springclouddemo.domain.dto.CustomUserDetails;
+import com.example.herosoft.springclouddemo.domain.entity.LoginUser;
 import com.example.herosoft.springclouddemo.utils.JWTUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.stereotype.Component;
 
@@ -39,9 +37,9 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 
         log.info("getInputStream: "+request.getInputStream().toString());
 
-        //User user = JSON.parseObject(request.getInputStream(), StandardCharsets.UTF_8, User.class);
+        LoginUser loginUser = JSON.parseObject(request.getInputStream(), StandardCharsets.UTF_8, LoginUser.class);
         UsernamePasswordAuthenticationToken authRequest = new UsernamePasswordAuthenticationToken(
-                request.getParameter("username"), request.getParameter("password"));
+                loginUser.getUsername(), loginUser.getPassword());
 
         // Allow subclasses to set the "details" property
         setDetails(request, authRequest);
@@ -52,18 +50,11 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         log.info("authentication filter successful authentication:{}", authResult);
 
-        //User user = (User) authResult.getPrincipal();
-
         CustomUserDetails customUserDetails =(CustomUserDetails) authResult.getPrincipal();
-                /*new CustomUserDetails(
-                user.getUsername(),
-                "",
-                user.isEnabled(),
-                user.isAccountNonExpired(),
-                user.isCredentialsNonExpired(),
-                user.isAccountNonLocked(),
-                user.getAuthorities()
-        );*/
+
+        //清除password信息后，再生成JWT
+        customUserDetails.setPassword("");
+
         response.setHeader("access-token", JWTUtils.TOKEN_PREFIX + JWTUtils.create(customUserDetails.getUsername(), false, customUserDetails));
     }
 

@@ -1,6 +1,7 @@
 package com.example.herosoft.springclouddemo.utils;
 
 import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.TypeReference;
 import com.example.herosoft.springclouddemo.domain.dto.CustomUserDetails;
@@ -9,10 +10,14 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
 import org.apache.catalina.User;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 public final class JWTUtils {
@@ -48,10 +53,23 @@ public final class JWTUtils {
         return claims(jwt).getSubject();
     }
     public static CustomUserDetails userDetails(String jwt){
+
+        List<GrantedAuthority> authorityList = new ArrayList<>();
+
         Claims claims = claims(jwt);
         String jsonString = JSON.toJSONString(claims);
 
-        return JSON.parseObject(jsonString,CustomUserDetails.class);
+        JSONArray jsonArray = JSONObject.parseObject(JSON.toJSONString(claims)).getJSONArray("authorities");
+        for(Object obj : jsonArray){
+            String authority = (String) JSONObject.parseObject(obj.toString()).get("authority");
+
+            authorityList.add(new SimpleGrantedAuthority(authority));
+        }
+
+        CustomUserDetails customUserDetails =JSON.parseObject(jsonString,CustomUserDetails.class);
+        customUserDetails.setAuthorities(authorityList);
+
+        return customUserDetails;
 
     }
 
