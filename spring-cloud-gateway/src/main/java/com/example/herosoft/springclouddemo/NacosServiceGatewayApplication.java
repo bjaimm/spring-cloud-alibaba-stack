@@ -12,14 +12,14 @@ import org.springframework.web.client.RestTemplate;
 @EnableDiscoveryClient
 public class NacosServiceGatewayApplication {
 /*以下代码是实现RestTemplate+Ribbon进行负载均衡, 如果用Feign+Ribbon实现负载均衡，这里就不能申明@Loadbanced RestTemplate，
-否则Feign远程方法调用抛异常
+否则Feign远程方法调用抛异常*/
 
     @LoadBalanced
     @Bean
     public RestTemplate restTemplate(){
         return new RestTemplate();
-    };
-*/
+    }
+
     public static void main(String[] args)
     {
         SpringApplication.run(NacosServiceGatewayApplication.class, args);

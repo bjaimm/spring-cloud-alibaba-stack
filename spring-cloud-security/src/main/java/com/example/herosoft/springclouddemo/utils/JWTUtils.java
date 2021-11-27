@@ -22,7 +22,7 @@ import java.util.Map;
 
 public final class JWTUtils {
 
-    public static final String TOKEN_HEADER="Authentication";
+    public static final String TOKEN_HEADER="Authorization";
     public static final String TOKEN_PREFIX="Bearer ";
     public static final String SECRET= "ajfalsfjalksfjasklfjakdsjflkdsajfdsalkjfdsalkjflkdsajfldsajflkdsajfkdsajfkdsajfkwuewruewourwuroewuewou";
     public static final String ISSUER="Herosoft";
