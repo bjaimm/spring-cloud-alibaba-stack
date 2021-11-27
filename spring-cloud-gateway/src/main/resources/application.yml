@@ -11,7 +11,7 @@ spring:
           enabled: true
       routes:
         - id: route1
-          uri: lb://spring-cloud-alibaba-nacos-discovery-service-provider
+          uri: lb://spring-cloud-security
           predicates:
             - Path=/*/**
     nacos:

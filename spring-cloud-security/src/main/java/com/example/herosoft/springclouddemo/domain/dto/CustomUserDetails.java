@@ -2,21 +2,25 @@ package com.example.herosoft.springclouddemo.domain.dto;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.SpringSecurityCoreVersion;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
+import org.springframework.util.Assert;
 
-import java.util.Collection;
+import java.io.Serializable;
+import java.util.*;
 
 
 public class CustomUserDetails implements UserDetails {
 
-    private Collection<? extends GrantedAuthority> authorities = null;
+    private List<GrantedAuthority> authorities;
     private String username;
     private String password;
-    private boolean isAccountNonExpired =true;
-    private boolean isAccountNonLocked = true;
-    private boolean isCredentialsNonExpired = true;
-    private boolean isEnabled = true;
+    private boolean isAccountNonExpired ;
+    private boolean isAccountNonLocked ;
+    private boolean isCredentialsNonExpired;
+    private boolean isEnabled;
 
     public CustomUserDetails(String username, String password, boolean enabled, boolean accountNonExpired, boolean credentialsNonExpired, boolean accountNonLocked, Collection<? extends GrantedAuthority> authorities){
 
@@ -31,11 +35,11 @@ public class CustomUserDetails implements UserDetails {
         this.isAccountNonExpired = accountNonExpired;
         this.isCredentialsNonExpired = credentialsNonExpired;
         this.isAccountNonLocked = accountNonLocked;
-        this.authorities = authorities;
+        this.authorities = new ArrayList<>(authorities);
     }
 
     @Override
-    public Collection<? extends GrantedAuthority> getAuthorities() {
+    public Collection<GrantedAuthority> getAuthorities() {
         /*String role1 = "ROLE_ADMIN";
         String role2 = "ROLE_USER";
 
@@ -49,7 +53,6 @@ public class CustomUserDetails implements UserDetails {
 
         return authorities;
     }
-
     @Override
     public String getPassword() {
         return password;
@@ -105,6 +108,6 @@ public class CustomUserDetails implements UserDetails {
     }
 
     public void setAuthorities(Collection<? extends GrantedAuthority> authorities) {
-        this.authorities = authorities;
+        this.authorities = new ArrayList<>(authorities) ;
     }
 }

@@ -14,6 +14,7 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Locale;
 import java.util.Set;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -44,6 +45,8 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
         CustomUserDetails customUserDetails = JWTUtils.userDetails(jsonWebToken);
 
+        log.info(String.valueOf(customUserDetails.getAuthorities().size()));
+        customUserDetails.getAuthorities().forEach(item -> {log.info(item.getAuthority().toString());});
 
         SecurityContextHolder.getContext().setAuthentication(
                 new UsernamePasswordAuthenticationToken(

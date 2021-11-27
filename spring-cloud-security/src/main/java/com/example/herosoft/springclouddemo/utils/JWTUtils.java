@@ -8,8 +8,8 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.apache.catalina.User;
 
-import javax.crypto.SecretKey;
 import java.sql.Date;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
@@ -31,22 +31,27 @@ public final class JWTUtils {
                 .setIssuedAt(Date.from(LocalDateTime.now().atZone(ZoneId.systemDefault()).toInstant()))
                 .setIssuer(ISSUER)
                 .signWith(Keys.hmacShaKeyFor(SECRET.getBytes()), SignatureAlgorithm.HS512)
-                //.serializeToJsonWith(map -> JSON.toJSONBytes(map))
+                .serializeToJsonWith(map -> JSON.toJSONBytes(map))
                 .compact();
+
     }
     public static Claims claims(String jwt){
         return Jwts.parserBuilder()
                 .setSigningKey(Keys.hmacShaKeyFor(SECRET.getBytes()))
-                //.deserializeJsonWith(bytes -> JSONObject.parseObject(new String(bytes),new TypeReference<Map<String,Object>>(){}))
+                .deserializeJsonWith(bytes -> JSONObject.parseObject(new String(bytes),new TypeReference<Map<String,Object>>(){}))
                 .build()
                 .parseClaimsJws(jwt)
                 .getBody();
+
     }
     public static String subject(String jwt){
         return claims(jwt).getSubject();
     }
     public static CustomUserDetails userDetails(String jwt){
-        return JSON.parseObject(JSON.toJSONString(claims(jwt)),CustomUserDetails.class);
+        Claims claims = claims(jwt);
+        String jsonString = JSON.toJSONString(claims);
+
+        return JSON.parseObject(jsonString,CustomUserDetails.class);
 
     }
 

@@ -52,8 +52,10 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
     protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
         log.info("authentication filter successful authentication:{}", authResult);
 
-        User user = (User) authResult.getPrincipal();
-        CustomUserDetails customUserDetails = new CustomUserDetails(
+        //User user = (User) authResult.getPrincipal();
+
+        CustomUserDetails customUserDetails =(CustomUserDetails) authResult.getPrincipal();
+                /*new CustomUserDetails(
                 user.getUsername(),
                 "",
                 user.isEnabled(),
@@ -61,7 +63,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
                 user.isCredentialsNonExpired(),
                 user.isAccountNonLocked(),
                 user.getAuthorities()
-        );
+        );*/
         response.setHeader("access-token", JWTUtils.TOKEN_PREFIX + JWTUtils.create(customUserDetails.getUsername(), false, customUserDetails));
     }
 
