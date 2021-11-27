@@ -46,7 +46,7 @@ public class JWTAuthorizationFilter extends OncePerRequestFilter {
         CustomUserDetails customUserDetails = JWTUtils.userDetails(jsonWebToken);
 
         log.info(String.valueOf(customUserDetails.getAuthorities().size()));
-        customUserDetails.getAuthorities().forEach(item -> {log.info(item.getAuthority().toString());});
+        customUserDetails.getAuthorities().forEach(item -> log.info(item.getAuthority()));
 
         SecurityContextHolder.getContext().setAuthentication(
                 new UsernamePasswordAuthenticationToken(

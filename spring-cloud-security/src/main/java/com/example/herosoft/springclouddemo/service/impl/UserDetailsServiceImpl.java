@@ -1,4 +1,4 @@
-package com.example.herosoft.springclouddemo.service;
+package com.example.herosoft.springclouddemo.service.impl;
 
 import com.example.herosoft.springclouddemo.domain.entity.MyRole;
 import com.example.herosoft.springclouddemo.domain.entity.MyUser;

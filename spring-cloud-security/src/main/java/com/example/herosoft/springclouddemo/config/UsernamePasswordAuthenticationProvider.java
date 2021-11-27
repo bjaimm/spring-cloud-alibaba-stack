@@ -1,6 +1,6 @@
 package com.example.herosoft.springclouddemo.config;
 
-import com.example.herosoft.springclouddemo.service.UserDetailsServiceImpl;
+import com.example.herosoft.springclouddemo.service.impl.UserDetailsServiceImpl;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;

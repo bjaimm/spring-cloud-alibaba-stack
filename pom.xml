@@ -10,6 +10,8 @@
     <modules>
         <module>spring-cloud-security</module>
         <module>spring-cloud-gateway</module>
+        <module>spring-cloud-common</module>
+        <module>spring-cloud-user-service</module>
     </modules>
 
     <packaging>pom</packaging>
