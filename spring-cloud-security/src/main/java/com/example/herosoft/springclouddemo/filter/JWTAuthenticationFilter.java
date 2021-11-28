@@ -27,8 +27,8 @@ import java.nio.charset.StandardCharsets;
 public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
 
     public JWTAuthenticationFilter() {
-        super.setFilterProcessesUrl("/auth/login");
-        super.setUsernameParameter("name");
+        super.setFilterProcessesUrl("/auth/login/v1");
+        //super.setUsernameParameter("name");
     }
 
     @SneakyThrows

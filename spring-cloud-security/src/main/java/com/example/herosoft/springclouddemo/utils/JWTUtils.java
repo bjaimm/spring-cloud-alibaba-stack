@@ -52,6 +52,20 @@ public final class JWTUtils {
     public static String subject(String jwt){
         return claims(jwt).getSubject();
     }
+
+    public static boolean check(String jwt){
+        try{
+            Claims claims = claims(jwt);
+            if(null!=claims){
+                return true;
+            }
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return false;
+        }
+        return false;
+    }
     public static CustomUserDetails userDetails(String jwt){
 
         List<GrantedAuthority> authorityList = new ArrayList<>();

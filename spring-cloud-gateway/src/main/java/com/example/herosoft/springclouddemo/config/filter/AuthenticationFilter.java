@@ -1,4 +1,4 @@
-package com.example.herosoft.springclouddemo;
+package com.example.herosoft.springclouddemo.config.filter;
 
 import com.example.herosoft.springclouddemo.config.JsonResponseUtils;
 import lombok.extern.slf4j.Slf4j;
@@ -44,10 +44,10 @@ public class AuthenticationFilter {
 
             //判断是否需要过滤
             String path = request.getURI().getPath();
-            List<String> pages= Arrays.asList("/auth/v1/login","/auth/v1/refresh","/auth/v1/check");
+            List<String> pages= Arrays.asList("/auth/login/","/auth/refresh/","/auth/check/");
 
             for (String page : pages) {
-                if (page.equals(path)) {
+                if (path.startsWith(page)) {
                     //直接通过，传到下一级
                     return chain.filter(exchange);
                 }
@@ -78,22 +78,22 @@ public class AuthenticationFilter {
             //通过远程调用鉴权服务判断JWT是否合法
             String json="";
             try{
-                Map<?,?> ret = restTemplate.getForObject("http://spring-cloud-security/auth/v1/info?jwt="+jwt,Map.class);
-                String code = ret.get("code").toString();
-                if(!"0".equals(code)){
+                Boolean ret = restTemplate.getForObject("http://spring-cloud-security/auth/check/v1?jwt="+jwt,Boolean.class);
+
+                if(!ret){
                     //返回错误
                     return error(response,JsonResponseUtils.AUTH_EXP_ERROR);
                 }
-                json=ret.get("data").toString();
+                return chain.filter(exchange);
             }catch (Exception e){
                 e.printStackTrace();
                 return error(response,JsonResponseUtils.AUTH_EXP_ERROR);
             }
 
             //将登陆信息保存到下一级
-            ServerHttpRequest newrequest = request.mutate().header("auth",json).build();
+            /*ServerHttpRequest newrequest = request.mutate().header("auth",json).build();
             ServerWebExchange newexchange = exchange.mutate().request(newrequest).build();
-            return chain.filter(newexchange);
+            return chain.filter(newexchange);*/
         };
     }
 

@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class HelloController {
 
-    @GetMapping("/auth/hello")
+    @GetMapping("/auth/hello/v1")
     public String hello(){
         log.info("authentication : {}", SecurityContextHolder.getContext().getAuthentication());
         return "Hello and congratulation, you have successfully accessed inside.";

@@ -10,10 +10,16 @@ spring:
         locator:
           enabled: true
       routes:
-        - id: route1
+        - id: AuthenticationService
           uri: lb://spring-cloud-security
           predicates:
-            - Path=/*/**
+            - Path=/auth/{segment}
+          filters:
+            - SetPath=/auth/{segment}/v1
+        - id: UserService
+          uri: lb://spring-cloud-user-service
+          predicates:
+            - Path=/user/**
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848,127.0.0.1:8858,127.0.0.1:8868
