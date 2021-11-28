@@ -8,6 +8,6 @@ import org.springframework.web.bind.annotation.RestController;
 public class OrderController {
     @RequestMapping("/hello")
     public String hello(){
-        return "Hello, you are in Order Service now";
+        return "Hello, you are in Order Service now!";
     }
 }
