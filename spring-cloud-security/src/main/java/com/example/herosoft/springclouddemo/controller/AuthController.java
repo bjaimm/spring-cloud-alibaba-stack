@@ -8,6 +8,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.Map;
 
+import static javafx.scene.input.KeyCode.R;
+
 @RestController
 @RequestMapping(value = "/auth")
 public class AuthController {
@@ -24,4 +26,5 @@ public class AuthController {
         }
         return JWTUtils.check(authorization);
     }
+
 }
