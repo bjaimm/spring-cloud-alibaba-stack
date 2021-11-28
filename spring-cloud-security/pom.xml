@@ -76,7 +76,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.example.herosoft.springclouddemo.NacosServiceSecurityApplication</mainClass>
+                    <mainClass>com.example.herosoft.springclouddemo.security.NacosServiceSecurityApplication</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
                 <executions>

@@ -84,7 +84,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.example.herosoft.springclouddemo.NacosServiceGatewayApplication</mainClass>
+                    <mainClass>com.example.herosoft.springclouddemo.gateway.NacosServiceGatewayApplication</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
                 <executions>
