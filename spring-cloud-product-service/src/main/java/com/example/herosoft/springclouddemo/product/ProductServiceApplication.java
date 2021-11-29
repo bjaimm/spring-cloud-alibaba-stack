@@ -6,7 +6,7 @@ import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
 @SpringBootApplication
-@EntityScan("com.example.herosoft.domain.entity")
+@EntityScan("com.example.herosoft.springclouddemo.common.domain.entity")
 @EnableDiscoveryClient
 public class ProductServiceApplication {
     public static void main(String[] args) {

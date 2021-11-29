@@ -15,11 +15,13 @@ import org.springframework.http.server.reactive.ServerHttpRequest;
 import org.springframework.http.server.reactive.ServerHttpResponse;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.client.RestTemplate;
+import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Mono;
 
 import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
 
 @Configuration
 @Slf4j
@@ -74,23 +76,23 @@ public class AuthenticationFilter {
 
             //通过远程调用鉴权服务判断JWT是否合法
             String json="";
+            Map ret;
             try{
-                Boolean ret = restTemplate.getForObject("http://spring-cloud-security/auth/check/v1?jwt="+jwt,Boolean.class);
+                ret = restTemplate.getForObject("http://spring-cloud-security/auth/check/v1?jwt="+jwt,Map.class);
 
-                if(!ret){
+                if(ret==null){
                     //返回错误
                     return error(response,JsonResponseUtils.AUTH_EXP_ERROR);
                 }
-                return chain.filter(exchange);
             }catch (Exception e){
                 e.printStackTrace();
                 return error(response,JsonResponseUtils.AUTH_EXP_ERROR);
             }
 
             //将登陆信息保存到下一级
-            /*ServerHttpRequest newrequest = request.mutate().header("auth",json).build();
+            ServerHttpRequest newrequest = request.mutate().header("LoginAuth", String.valueOf(ret)).build();
             ServerWebExchange newexchange = exchange.mutate().request(newrequest).build();
-            return chain.filter(newexchange);*/
+            return chain.filter(newexchange);
         };
     }
 

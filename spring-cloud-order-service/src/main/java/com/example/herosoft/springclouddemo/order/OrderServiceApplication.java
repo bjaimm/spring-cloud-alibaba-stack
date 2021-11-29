@@ -7,7 +7,7 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
 @SpringBootApplication
-@EntityScan("com.example.herosoft.domain.entity")
+@EntityScan("com.example.herosoft.springclouddemo.common.domain.entity")
 @EnableDiscoveryClient
 @EnableFeignClients
 public class OrderServiceApplication {

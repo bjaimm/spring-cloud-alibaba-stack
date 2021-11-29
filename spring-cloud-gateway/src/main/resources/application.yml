@@ -16,10 +16,21 @@ spring:
             - Path=/auth/{segment}
           filters:
             - SetPath=/auth/{segment}/v1
+
         - id: UserService
           uri: lb://spring-cloud-user-service
           predicates:
             - Path=/user/**
+
+        - id: ProductService
+          uri: lb://spring-cloud-product-service
+          predicates:
+            - Path=/product/**
+
+        - id: OrderService
+          uri: lb://spring-cloud-order-service
+          predicates:
+            - Path=/order/**
     nacos:
       discovery:
         server-addr: 127.0.0.1:8848,127.0.0.1:8858,127.0.0.1:8868
