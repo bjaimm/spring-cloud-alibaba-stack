@@ -1,4 +1,4 @@
-package com.example.herosoft.springclouddemo.security.domain.entity;
+package com.example.herosoft.springclouddemo.security.filter;
 
 import lombok.Data;
 

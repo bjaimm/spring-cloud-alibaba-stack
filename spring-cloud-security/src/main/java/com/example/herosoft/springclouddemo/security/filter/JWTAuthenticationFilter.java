@@ -2,7 +2,6 @@ package com.example.herosoft.springclouddemo.security.filter;
 
 import com.alibaba.fastjson.JSON;
 import com.example.herosoft.springclouddemo.security.domain.dto.CustomUserDetails;
-import com.example.herosoft.springclouddemo.security.domain.entity.LoginUser;
 import com.example.herosoft.springclouddemo.security.utils.JWTUtils;
 import lombok.SneakyThrows;
 import lombok.extern.slf4j.Slf4j;
