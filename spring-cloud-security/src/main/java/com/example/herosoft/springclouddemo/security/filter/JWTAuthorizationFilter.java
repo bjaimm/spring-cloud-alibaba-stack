@@ -22,7 +22,7 @@ import java.util.stream.Stream;
 @Slf4j
 public class JWTAuthorizationFilter extends OncePerRequestFilter {
 
-    private static final Set<String> WHITE_LIST= Stream.of("/auth/register/v1","/auth/check/v1").collect(Collectors.toSet());
+    private static final Set<String> WHITE_LIST= Stream.of("/v1/auth/register","/v1/auth/check").collect(Collectors.toSet());
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {

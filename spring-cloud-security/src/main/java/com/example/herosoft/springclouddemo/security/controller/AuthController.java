@@ -9,10 +9,10 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping(value = "/auth")
+@RequestMapping(value = "/v1/auth")
 public class AuthController {
 
-    @GetMapping("/check/v1")
+    @RequestMapping(value="/check")
     public Map checkJWT(@RequestParam String jwt){
         String authorization;
         Map map = new HashMap();

@@ -43,10 +43,10 @@ public class AuthenticationFilter {
 
             //判断是否需要过滤
             String path = request.getURI().getPath();
-            List<String> pages= Arrays.asList("/auth/login/","/auth/refresh/","/auth/check/");
+            List<String> pages= Arrays.asList("/auth/login","/auth/refresh","/auth/check");
 
             for (String page : pages) {
-                if (path.startsWith(page)) {
+                if (path.endsWith(page)) {
                     //直接通过，传到下一级
                     return chain.filter(exchange);
                 }
@@ -78,7 +78,7 @@ public class AuthenticationFilter {
             String json="";
             Map ret;
             try{
-                ret = restTemplate.getForObject("http://spring-cloud-security/auth/check/v1?jwt="+jwt,Map.class);
+                ret = restTemplate.getForObject("http://spring-cloud-security/v1/auth/check?jwt="+jwt,Map.class);
 
                 if(ret==null){
                     //返回错误

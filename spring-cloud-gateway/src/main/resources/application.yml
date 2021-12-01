@@ -13,9 +13,11 @@ spring:
         - id: AuthenticationService
           uri: lb://spring-cloud-security
           predicates:
-            - Path=/auth/{segment}
+            #- Path=/auth/{segment}
+            - Path=/auth/**
           filters:
-            - SetPath=/auth/{segment}/v1
+            #- SetPath=/auth/{segment}/v1
+            - PrefixPath=/v1
 
         - id: UserService
           uri: lb://spring-cloud-user-service

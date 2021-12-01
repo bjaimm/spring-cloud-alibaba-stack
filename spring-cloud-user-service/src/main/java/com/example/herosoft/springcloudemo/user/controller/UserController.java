@@ -1,5 +1,6 @@
 package com.example.herosoft.springcloudemo.user.controller;
 
+import com.example.herosoft.springclouddemo.common.domain.entity.Role;
 import com.example.herosoft.springclouddemo.common.domain.entity.ShopUser;
 import com.example.herosoft.springcloudemo.user.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,12 @@ public class UserController {
     }
 
     @RequestMapping("/name/{username}")
-    public List<ShopUser> findUserByName(@PathVariable("username") String username){
+    public ShopUser findUserByName(@PathVariable("username") String username){
         return userService.findUserByName(username);
+    }
+
+    @RequestMapping("/roles/{userid}")
+    public List<Role> findUserByName(@PathVariable("userid") Integer userid){
+        return userService.findRolesByUserId(userid);
     }
 }

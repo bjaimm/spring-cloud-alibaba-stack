@@ -28,7 +28,7 @@ public class OrderController {
     }
 
     @RequestMapping("/user/{username}")
-    public List<ShopUser> findUserByName(@PathVariable String username){
+    public ShopUser findUserByName(@PathVariable String username){
         log.info("Open Feign call starting for spring-cloud-user-service!");
         return userService.findUserByName(username);
     }
