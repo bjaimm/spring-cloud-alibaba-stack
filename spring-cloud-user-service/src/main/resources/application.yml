@@ -21,7 +21,14 @@ spring:
         server-addr: 127.0.0.1:8848,127.0.0.1:8858,127.0.0.1:8868
         username: nacos
         password: nacos
-
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    discovery-client-enabled: false
+    base-url: http://localhost:9411
+    sender:
+      type: web
 logging:
   level:
     root: info

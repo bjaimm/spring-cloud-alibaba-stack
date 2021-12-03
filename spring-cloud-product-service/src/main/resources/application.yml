@@ -18,10 +18,35 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848,127.0.0.1:8858,127.0.0.1:8868
+        server-addr: 127.0.0.1:8848
         username: nacos
         password: nacos
+    stream:
+      rocketmq:
+        binder:
+          name-server: 127.0.0.1:9876
+        bindings:
+          input1:
+            consumer:
+              tags: tag1 || tag2 || tag3 || tag4
 
+      bindings:
+        input1:
+          destination: test-topic
+          group: test-group
+          binder: rocketmq
+          consumber:
+            instanceCount: 1
+        output1:
+          destination: test-topic
+  sleuth:
+    sampler:
+      probability: 1.0
+  zipkin:
+    discovery-client-enabled: false
+    base-url: http://localhost:9411
+    sender:
+      type: web
 logging:
   level:
     root: info
