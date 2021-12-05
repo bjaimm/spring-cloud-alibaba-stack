@@ -1,4 +1,4 @@
-package com.example.herosoft.springclouddemo.common.domain.POJO;
+package com.example.herosoft.springclouddemo.common.domain.model;
 
 import lombok.Data;
 

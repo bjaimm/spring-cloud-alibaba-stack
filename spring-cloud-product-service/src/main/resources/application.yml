@@ -28,14 +28,20 @@ spring:
         bindings:
           input1:
             consumer:
-              tags: tag1 || tag2 || tag3 || tag4
+              TAGS: tag1 || tag2 || tag3 || tag4
 
       bindings:
         input1:
           destination: test-topic
           group: test-group
           binder: rocketmq
-          consumber:
+          consumer:
+            instanceCount: 1
+        input:
+          destination: topic-txmsg
+          group: tx-consumer-order-group
+          binder: rocketmq
+          consumer:
             instanceCount: 1
         output1:
           destination: test-topic

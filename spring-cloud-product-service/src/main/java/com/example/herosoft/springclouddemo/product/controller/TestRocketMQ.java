@@ -4,13 +4,14 @@ import com.example.herosoft.springclouddemo.product.messages.CustomChannels;
 import org.apache.rocketmq.spring.support.RocketMQHeaders;
 import org.springframework.cloud.stream.annotation.EnableBinding;
 import org.springframework.cloud.stream.annotation.StreamListener;
+import org.springframework.cloud.stream.messaging.Sink;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@EnableBinding({CustomChannels.class})
+@EnableBinding({CustomChannels.class,Sink.class})
 public class TestRocketMQ {
 
     private CustomChannels customChannels;
@@ -45,4 +46,5 @@ public class TestRocketMQ {
     public void reciveMessage2(Message message){
         System.out.println("TAGS:"+message.getHeaders().get("rocketmq_TAGS")+"   Payload:"+message.getPayload().toString());
     }
+
 }

@@ -1,7 +1,7 @@
 package com.example.herosoft.springclouddemo.order.controller;
 
 import com.alibaba.fastjson.JSONObject;
-import com.example.herosoft.springclouddemo.common.domain.POJO.TxMessage;
+import com.example.herosoft.springclouddemo.common.domain.model.TxMessage;
 import com.example.herosoft.springclouddemo.common.domain.entity.ShopProduct;
 import com.example.herosoft.springclouddemo.common.domain.entity.ShopUser;
 import com.example.herosoft.springclouddemo.order.service.ProductService;
@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -49,7 +50,8 @@ public class OrderController {
     }
 
     @RequestMapping("/placeOrder")
-    public String placeOrder(){
+    public String placeOrder(@RequestHeader("LoginAuth") String loginAuth){
+        submitOrder(2,3);
         return "Success";
     }
 
