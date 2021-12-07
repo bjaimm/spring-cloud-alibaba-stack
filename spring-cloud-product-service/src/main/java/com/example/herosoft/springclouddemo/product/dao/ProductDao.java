@@ -13,4 +13,7 @@ public interface ProductDao extends JpaRepository<ShopProduct,Integer> {
 
     @Query(value="select * from shop_product where product_name like %?1",nativeQuery = true)
     List<ShopProduct> findProductByName(String pname);
+
+    @Query(value="select * from shop_product where id = ?1",nativeQuery = true)
+    ShopProduct findProductById(Integer pId);
 }

@@ -9,4 +9,6 @@ import java.util.List;
 @Service
 public interface ProductService {
     List<ShopProduct> findProductByName(String pname);
+
+    ShopProduct findProductById(Integer pId);
 }

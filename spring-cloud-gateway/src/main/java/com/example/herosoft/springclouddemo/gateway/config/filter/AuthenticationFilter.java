@@ -1,5 +1,6 @@
 package com.example.herosoft.springclouddemo.gateway.config.filter;
 
+import com.alibaba.fastjson.JSONObject;
 import com.example.herosoft.springclouddemo.gateway.config.JsonResponseUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang.StringUtils;
@@ -90,7 +91,7 @@ public class AuthenticationFilter {
             }
 
             //将登陆信息保存到下一级
-            ServerHttpRequest newrequest = request.mutate().header("LoginAuth", String.valueOf(ret)).build();
+            ServerHttpRequest newrequest = request.mutate().header("LoginAuth", JSONObject.toJSONString(ret)).build();
             ServerWebExchange newexchange = exchange.mutate().request(newrequest).build();
             return chain.filter(newexchange);
         };

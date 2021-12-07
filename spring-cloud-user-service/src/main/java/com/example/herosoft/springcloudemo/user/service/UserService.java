@@ -9,6 +9,6 @@ import java.util.List;
 @Service
 public interface UserService {
     ShopUser findUserByName(String username);
-
+    ShopUser findUserById(Integer userId);
     List<Role> findRolesByUserId(Integer userid);
 }

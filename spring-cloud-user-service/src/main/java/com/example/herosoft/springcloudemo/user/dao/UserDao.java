@@ -10,4 +10,7 @@ import org.springframework.stereotype.Repository;
 public interface UserDao extends JpaRepository<ShopUser,Integer> {
     @Query(value="select * from shop_user where user_name like %?1",nativeQuery = true)
     ShopUser findUserByName(String username);
+
+    @Query(value="select * from shop_user where u_id = ?1",nativeQuery = true)
+    ShopUser findUserById(Integer userId);
 }

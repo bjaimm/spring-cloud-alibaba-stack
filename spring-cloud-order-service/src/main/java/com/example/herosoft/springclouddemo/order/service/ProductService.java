@@ -13,4 +13,7 @@ public interface ProductService {
 
     @RequestMapping("/name/{pname}")
     List<ShopProduct> findProductByName(@PathVariable("pname") String pname);
+
+    @RequestMapping("/id/{pid}")
+    ShopProduct findProductById(@PathVariable("pid") Integer pid);
 }

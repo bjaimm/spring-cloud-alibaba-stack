@@ -1,5 +1,6 @@
 package com.example.herosoft.springclouddemo.order.controller;
 
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.example.herosoft.springclouddemo.common.domain.model.TxMessage;
 import com.example.herosoft.springclouddemo.common.domain.entity.ShopProduct;
@@ -11,12 +12,11 @@ import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.Message;
 import org.springframework.messaging.support.MessageBuilder;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestHeader;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 @RestController
@@ -50,14 +50,40 @@ public class OrderController {
     }
 
     @RequestMapping("/placeOrder")
-    public String placeOrder(@RequestHeader("LoginAuth") String loginAuth){
-        submitOrder(2,3);
-        return "Success";
+    public String placeOrder(@RequestHeader("LoginAuth") String loginAuth,
+                             @RequestParam(value = "productId") Integer productId,
+                             @RequestParam(value="orderNumber") Integer orderNumber){
+        Integer userId;
+
+        JSONObject jsonObject = JSONObject.parseObject(loginAuth);
+        String userName = jsonObject.getString("username");
+        String deptNo = jsonObject.getString("deptno");
+        JSONArray authorities = jsonObject.getObject("authorities",JSONArray.class);
+
+        authorities.stream().forEach(json -> {
+            log.info(JSONObject.parseObject(json.toString()).getString("authority"));
+        });
+
+        userId= userService.findUserByName(userName).getUId();
+
+        if(userId==null){
+            return "UserId is missing in the request for placing order!";
+        }
+
+        if(productId==null){
+            return "ProductId is missing in the request for placing order!";
+        }
+        if(orderNumber==null){
+            return "OrderNumber is missing in the request for placing order!";
+        }
+
+        submitOrder(userId,productId,orderNumber);
+        return "Successfully placed order!";
     }
 
-    public void submitOrder(Integer productId, Integer orderCount){
+    public void submitOrder(Integer userId,Integer productId, Integer orderCount){
         String txId = UUID.randomUUID().toString();
-        TxMessage txMessage = new TxMessage(productId,orderCount,txId);
+        TxMessage txMessage = new TxMessage(productId,orderCount,txId,userId);
         JSONObject jsonObject = new JSONObject();
 
         jsonObject.put("txMessage",txMessage);

@@ -24,6 +24,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public ShopUser findUserById(Integer userId) {
+        return userDao.findUserById(userId);
+    }
+
+    @Override
     public List<Role> findRolesByUserId(Integer userid) {
         return roleDao.findRolesByUserId(userid);
     }

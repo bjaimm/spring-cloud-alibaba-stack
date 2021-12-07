@@ -12,4 +12,7 @@ import java.util.List;
 public interface UserService {
     @RequestMapping("/name/{username}")
     ShopUser findUserByName(@PathVariable("username") String username);
+
+    @RequestMapping("/id/{userid}")
+    ShopUser findUserById(@PathVariable("userid") Integer userid);
 }

@@ -22,4 +22,6 @@ public class ShopOrder {
     private Double shopProductPrice;
 
     private Integer orderNumber;
+
+    private String txId;
 }

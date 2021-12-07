@@ -25,4 +25,8 @@ public class ProductController {
     public List<ShopProduct> findProductByName(@PathVariable("pname") String pname){
         return productService.findProductByName(pname);
     }
+    @RequestMapping("/id/{pid}")
+    public ShopProduct findProductById(@PathVariable("pid") Integer pid){
+        return productService.findProductById(pid);
+    }
 }

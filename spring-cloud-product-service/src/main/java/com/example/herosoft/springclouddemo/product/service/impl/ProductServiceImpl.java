@@ -18,4 +18,9 @@ public class ProductServiceImpl implements ProductService {
 
         return productDao.findProductByName(pname);
     }
+
+    @Override
+    public ShopProduct findProductById(Integer pId) {
+        return productDao.findProductById(pId);
+    }
 }

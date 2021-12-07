@@ -27,7 +27,7 @@ public class OrderTxMessageListener implements RocketMQLocalTransactionListener 
         try{
             log.info("订单微服务开始执行本地事务。。。。。。");
             TxMessage txMessage = this.getTxMessage(message);
-            log.info("ProductID:"+txMessage.getProductId()+" OrderCount:"+txMessage.getOrderCount()+" TxId:"+txMessage.getTxId());
+            log.info("UserID:"+txMessage.getUserId()+" ProductID:"+txMessage.getProductId()+" OrderCount:"+txMessage.getOrderCount()+" TxId:"+txMessage.getTxId());
 
             //执行本地事务
             orderService.submitOrderAndSaveTxId(txMessage);

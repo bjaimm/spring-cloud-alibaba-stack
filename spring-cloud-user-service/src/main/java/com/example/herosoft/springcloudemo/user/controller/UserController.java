@@ -29,6 +29,11 @@ public class UserController {
         return userService.findUserByName(username);
     }
 
+    @RequestMapping("/id/{userid}")
+    public ShopUser findUserById(@PathVariable("userid") Integer userid){
+        return userService.findUserById(userid);
+    }
+
     @RequestMapping("/roles/{userid}")
     public List<Role> findUserByName(@PathVariable("userid") Integer userid){
         return userService.findRolesByUserId(userid);
