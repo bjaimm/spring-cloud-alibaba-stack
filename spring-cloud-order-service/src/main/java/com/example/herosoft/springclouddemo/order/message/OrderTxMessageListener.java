@@ -1,8 +1,10 @@
 package com.example.herosoft.springclouddemo.order.message;
 
 import com.alibaba.fastjson.JSONObject;
+import com.example.herosoft.springclouddemo.common.domain.entity.TxOrderMessage;
 import com.example.herosoft.springclouddemo.common.domain.model.TxMessage;
 import com.example.herosoft.springclouddemo.order.service.OrderService;
+import com.example.herosoft.springclouddemo.order.service.TxOrderMessageService;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.spring.annotation.RocketMQTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionListener;
@@ -20,6 +22,9 @@ public class OrderTxMessageListener implements RocketMQLocalTransactionListener 
 
     @Autowired
     private OrderService orderService;
+
+    @Autowired
+    private TxOrderMessageService txOrderMessageService;
 
     @Override
     public RocketMQLocalTransactionState executeLocalTransaction(Message message, Object o) {
@@ -58,7 +63,15 @@ public class OrderTxMessageListener implements RocketMQLocalTransactionListener 
 
         //这里调用订单微服务查询本地事务的状态，如果已完成，则返回RocketMQLocalTransactionState.COMMIT,
         //否则返回RocketMQLocalTransactionState.ROLLBACK
+        TxOrderMessage txOrderMessage = txOrderMessageService.findTxOrderMessagesByTxId(txMessage.getTxId());
+        if(txOrderMessage!=null) {
+            log.info("订单微服务查询本地事务状态 - 提交事务消息");
+            return RocketMQLocalTransactionState.COMMIT;
 
-        return RocketMQLocalTransactionState.COMMIT;
+        }
+        else{
+            log.info("订单微服务查询本地事务状态 - 回滚事务消息");
+            return RocketMQLocalTransactionState.ROLLBACK;
+        }
     }
 }

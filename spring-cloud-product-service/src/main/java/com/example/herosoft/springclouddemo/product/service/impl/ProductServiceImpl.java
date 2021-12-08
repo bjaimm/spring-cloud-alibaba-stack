@@ -23,4 +23,9 @@ public class ProductServiceImpl implements ProductService {
     public ShopProduct findProductById(Integer pId) {
         return productDao.findProductById(pId);
     }
+
+    @Override
+    public void decreaseProductStock(Integer pid, Integer descreasenNumber) {
+        productDao.descreaseProductStock(pid,descreasenNumber);
+    }
 }

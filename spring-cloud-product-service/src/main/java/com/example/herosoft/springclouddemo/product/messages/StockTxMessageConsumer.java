@@ -50,12 +50,14 @@ public class StockTxMessageConsumer {
     private StockService stockService;
 
     @StreamListener(value=Sink.INPUT)
-    public void onMessage1(Message message) {
+    public void onMessage(Message message) {
         TxMessage txMessage = this.getTxMessage(message);
 
         log.info("商品微服务开始消费消息{}",txMessage);
 
         stockService.decreaseStock(txMessage);
+
+        log.info("商品微服务完成消费消息{}",txMessage);
 
     }
 

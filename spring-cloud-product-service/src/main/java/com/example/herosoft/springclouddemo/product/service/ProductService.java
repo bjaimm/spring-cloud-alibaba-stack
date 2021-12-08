@@ -11,4 +11,6 @@ public interface ProductService {
     List<ShopProduct> findProductByName(String pname);
 
     ShopProduct findProductById(Integer pId);
+
+    void decreaseProductStock(Integer pid, Integer descreasenNumber);
 }
