@@ -7,10 +7,11 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.criteria.CriteriaBuilder;
+import java.io.Serializable;
 
 @Data
 @Entity(name="shop_product")
-public class ShopProduct {
+public class ShopProduct implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

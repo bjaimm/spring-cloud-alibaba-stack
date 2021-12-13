@@ -68,6 +68,7 @@
                         </goals>
                     </execution>
                 </executions>
+                <version>2.2.2.RELEASE</version>
             </plugin>
 
             <plugin>
@@ -78,6 +79,7 @@
                     <target>1.8</target>
                     <encoding>UTF-8</encoding>
                 </configuration>
+                <version>3.5.1</version>
             </plugin>
         </plugins>
     </build>
