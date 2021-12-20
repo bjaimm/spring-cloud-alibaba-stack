@@ -58,6 +58,10 @@
             <groupId>org.springframework.cloud</groupId>
             <artifactId>spring-cloud-starter-netflix-ribbon</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-quartz</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>
@@ -66,7 +70,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>com.example.herosoft.springclouddemo.order.OrderServiceApplication</mainClass>
+                    <mainClass>com.example.herosoft.springclouddemo.redis.RedisServiceApplication</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
                 <executions>

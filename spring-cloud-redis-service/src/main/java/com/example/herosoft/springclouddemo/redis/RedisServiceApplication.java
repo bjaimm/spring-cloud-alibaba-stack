@@ -11,6 +11,7 @@ import org.springframework.cloud.openfeign.EnableFeignClients;
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableFeignClients
+@EntityScan("com.example.herosoft.springclouddemo.common.domain.entity")
 public class RedisServiceApplication {
     public static void main(String[] args) {
 
