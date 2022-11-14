@@ -7,7 +7,7 @@ spring:
 
   datasource:
     url: jdbc:mysql://localhost:3306/nacos-security?characterEncoding=utf8
-    password: 1234
+    password: 123456
     username: root
     driver-class-name: com.mysql.cj.jdbc.Driver
 
@@ -18,7 +18,7 @@ spring:
   cloud:
     nacos:
       discovery:
-        server-addr: 127.0.0.1:8848,127.0.0.1:8858,127.0.0.1:8868
+        server-addr: 127.0.0.1:8848 #,127.0.0.1:8858,127.0.0.1:8868
         username: nacos
         password: nacos
   sleuth:
