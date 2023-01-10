@@ -32,7 +32,7 @@ public class UsernamePasswordAuthenticationProvider implements AuthenticationPro
         if(flag){
             return new UsernamePasswordAuthenticationToken(userDetails,password,userDetails.getAuthorities());
         }
-        throw new AuthenticationException("用户密码错误") {
+        throw new AuthenticationException("用户密码错误!") {
         };
     }
 
